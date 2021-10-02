@@ -1,0 +1,88 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Umbraco.Web
+
+
+@*
+    This snippet displays a list of links of the pages immediately under the top-most page in the content tree.
+    This is the home page for a standard website.
+    It also highlights the current active page/section in the navigation with the CSS class "current".
+*@
+
+@{
+    var root = Model.Content.Root();
+    var selection = root.Children.Where(x => x.IsVisible()).ToArray(); }
+
+@if (selection.Length > 0)
+{
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+             
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+
+                    <li class="nav-item @(Model.Content.Name == root.Name ? "active" : null)">
+                        <a href="@root.Url()">@root.Name</a>
+                    </li>
+
+                    @foreach (var item in selection)
+                    {
+                        if (item.Children.Any())
+                        {
+                        
+                        
+                            if(item.Name == "Projects")
+                            {
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@item.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                   <li> <a href="@item.Url()">All @item.Name</a> </li>
+                                    @foreach (var sub in item.Children.Where(x => x.HasValue("projectStatus") && x.GetProperty("projectStatus").Value<string>() == "Completed"
+                                    && x.HasValue("umbracoNaviHide") && x.GetProperty("umbracoNaviHide").Value<bool>() == false)
+                                                .OrderByDescending(x => x.CreateDate).ToArray())
+                                    {
+                                        <li><a href="@sub.Url()">@sub.Name</a></li>
+                                    }
+                                </ul>
+                            </li>
+                            
+                            }else if (item.Name != "Projects")
+                            {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@item.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                     <li> <a href="@item.Url()">All @item.Name</a> </li>
+                                    @foreach (var sub in item.Children.Where(x => x.IsVisible()).ToArray())
+                                    {
+                                        <li><a href="@sub.Url()">@sub.Name</a></li>
+                                    }
+                                   
+                                </ul>
+                            </li>
+                            }
+                        }
+                        else if(!item.Children.Any())
+                        {
+                        <li class="nav-item @(item.IsAncestorOrSelf(Model.Content) ? "active" : null)">
+                            <a href="@item.Url()">@item.Name</a>
+                        </li>
+                        }
+                    }
+
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+} 

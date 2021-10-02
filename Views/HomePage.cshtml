@@ -1,0 +1,63 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.HomePage>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+
+
+		<!-- Jumbotron, w title -->
+		<div class="jumbotron text-center jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-1">@Model.SiteTitle</h1>
+				<p>@Model.SiteTitle</p>
+			</div>
+		</div>
+
+		<!-- This is where we're going to render our content -->
+		
+		<div class="container">
+
+			<div class="row section">
+				<div class="col-md-12">
+
+			@Model.MainContent
+
+				</div>				
+			</div>
+
+		</div>
+
+	
+
+		<!-- Blog section -->
+		<div class="container">
+
+			<div class="row section">
+				<div class="col-md-12">
+					<h1>Latest 5 project that are completed</h1>
+				</div>
+
+				<!-- Blog Post query goes here. -->
+				<div class="col-md-4">
+				@Umbraco.RenderMacro("listNewestProjects")
+				</div>
+			
+			</div>
+
+		</div>
+
+		<!-- Call to Action -->
+		<div class="container-fluid orange-bg">
+			<div class="container">
+
+				<div class="row section">
+					<div class="col-md-12 text-center">
+						<h1>How to continue your Umbraco journey</h1>
+						<p>What’s next? We have gathered the 3 best ways for you to go on from here ensuring you get the best start to your Umbraco journey: <br/><br/></p>
+						<a href="#" class="btn btn-inverted-orange" role="button">3 ways to start your Umbraco Journey >></a>
+					</div>
+				</div>
+	
+			</div>
+		</div>

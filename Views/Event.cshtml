@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Event>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+<h1>@Model.EventTitle</h1>
+<p>@Model.EventDescription</p>
+<p>Start date: @Model.EventStartDate</p>
+<p>End date: @Model.EventEndDate</p>
+<p>Location: @Model.Location.Value("address")</p>
+
+@foreach(Speaker speaker in Model.Speakers)
+{
+
+<div><img src="@speaker.Photo.Url()" width="200"/><br/></div>
+
+<p>
+    @speaker.FirstName @speaker.LastName<br/>
+    @speaker.Presentation
+</p>
+}

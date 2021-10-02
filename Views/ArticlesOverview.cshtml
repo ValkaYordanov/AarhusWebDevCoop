@@ -1,0 +1,69 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.ArticlesOverview>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+
+		
+		<!-- Jumbotron, w title -->
+		<div class="jumbotron text-center jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-1">@Model.ArticlesTitle</h1>
+				<p>What we do when we do what we do - and why!</p>
+			</div>
+		</div>
+
+		<!-- Main container -->
+		<div class="container">
+
+			<!-- Featured blogpost -->
+			<div class="row section">
+				<div class="col-md-12">
+				@Model.ArticlesBodyText
+				</div>
+			</div>
+
+			<!-- Latest blog posts -->
+			<div class="row section">
+				<div class="col-md-12">
+					<h3>All Articles</h3>
+					
+					
+					
+                    @{
+                    	var selection = Umbraco.Content(Guid.Parse("522a60ed-3518-44d7-936e-a2861a2b01ec"))
+                        .ChildrenOfType("articleItem")
+                        .Where(x => x.IsVisible())
+                        .OrderByDescending(x => x.CreateDate);
+                    }
+                    <ul>
+                    	@foreach (var item in selection)
+                    	{
+                    		<article class="special">
+                            <div class="articledate" > @item.CreateDate </div>
+                            <div class="articletitle"><a href="@item.Url">@item.Name</a></div>
+                            <div class="articlepreview">@Html.Truncate(item.Value("articleContent").ToString(), 20, true)<a href="@item.Url">Read More..</a></div>
+                            </article>
+                            <br>
+                            <br>
+                    	}
+                    </ul>
+
+
+				</div>
+			</div>
+
+		
+		</div>
+		
+	
+	
+	<!-- Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
+	</body>
+</html>

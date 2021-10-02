@@ -1,0 +1,53 @@
+﻿
+@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{
+	Layout = null;
+}
+
+@* the fun starts here *@
+
+<html>
+	<head>
+		<title>AarhusWebDevCoop</title>
+		<meta charset="utf-8" />
+		<meta name="description" content=@Model.Value("description")>
+        <meta name="keywords" content=@Model.Value("keywords")>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/main.css" />
+	</head>
+	
+    <body>
+
+
+        <div class="container-fluid">
+
+
+
+
+            @Umbraco.RenderMacro("mainMenu")
+
+            @RenderBody()
+
+        </div>
+
+        <!-- Footer -->
+        <div class="container-fluid footer">
+            <div class="container">
+
+                @Model.Value("footer")
+            </div>
+        </div>
+
+        <!-- Scripts -->
+       
+        <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+    </body>
+</html>
