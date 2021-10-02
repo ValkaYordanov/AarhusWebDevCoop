@@ -298,15 +298,15 @@ Umbraco.Web.Cache.MemberGroupCacheRefresher, Umbraco.Web, Version=8.0.0.0, Cultu
 Umbraco.Web.Cache.PublicAccessCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.TemplateCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.UserCacheRefresher, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-AarhusWebDevCoop.Controllers.ProjectsOverviewController, AarhusWebDevCoop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-AarhusWebDevCoop.Controllers.ContactFormSurfaceController, AarhusWebDevCoop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.ModelsBuilderDashboard, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.Compose.ModelsBuilderComposer, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.BackOffice.MediaTypeModelValidator, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.BackOffice.MemberTypeModelValidator, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.BackOffice.ModelsBuilderDashboardController, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.BackOffice.ContentTypeModelValidator, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-AarhusWebDevCoop.App_Code.SetDefaultRenderMvcControllerComposer, App_Code.q3ulufu1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+AarhusWebDevCoop.Controllers.ProjectsOverviewController, AarhusWebDevCoop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+AarhusWebDevCoop.Controllers.ContactFormSurfaceController, AarhusWebDevCoop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+AarhusWebDevCoop.App_Code.SetDefaultRenderMvcControllerComposer, App_Code.n2aujevw, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.Composing.IComposer
 
@@ -337,7 +337,7 @@ Umbraco.Web.Compose.PublicAccessComposer, Umbraco.Web, Version=8.0.0.0, Culture=
 Umbraco.Web.Compose.NestedContentPropertyComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Cache.DistributedCacheBinderComposer, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.Compose.ModelsBuilderComposer, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
-AarhusWebDevCoop.App_Code.SetDefaultRenderMvcControllerComposer, App_Code.q3ulufu1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+AarhusWebDevCoop.App_Code.SetDefaultRenderMvcControllerComposer, App_Code.n2aujevw, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 
 Umbraco.Core.PropertyEditors.IPropertyValueConverter
 

@@ -15,16 +15,16 @@ namespace AarhusWebDevCoop.App_Code
        
         public void Compose(Composition composition)
         {
-            RouteTable.Routes.MapUmbracoRoute(
-                "ProjectsCustomerRoute",
-                "projects/{status}",
-                new
-                {
-                    controller = "ProjectsOverview",
-                    action = "index",
-                    status = UrlParameter.Optional
-                },
-                new UmbracoVirtualNodeByIdRouteHandler(1081));
+            //RouteTable.Routes.MapUmbracoRoute(
+            //    "ProjectsCustomerRoute",
+            //    "projects/{status}",
+            //    new
+            //    {
+            //        controller = "ProjectsOverview",
+            //        action = "index",
+            //        status = UrlParameter.Optional
+            //    },
+            //    new UmbracoVirtualNodeByIdRouteHandler(1081));
         }
     }
 }
