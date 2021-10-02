@@ -52,7 +52,10 @@
                                     && x.HasValue("umbracoNaviHide") && x.GetProperty("umbracoNaviHide").Value<bool>() == false)
                                                 .OrderByDescending(x => x.CreateDate).ToArray())
                                     {
+                                        if (Umbraco.MemberHasAccess(sub.Path))
+                                        {
                                         <li><a href="@sub.Url()">@sub.Name</a></li>
+                                        }
                                     }
                                 </ul>
                             </li>
@@ -74,6 +77,7 @@
                         }
                         else if(!item.Children.Any())
                         {
+
                         <li class="nav-item @(item.IsAncestorOrSelf(Model.Content) ? "active" : null)">
                             <a href="@item.Url()">@item.Name</a>
                         </li>
