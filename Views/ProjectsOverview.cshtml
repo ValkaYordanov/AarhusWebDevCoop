@@ -1,72 +1,64 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.ProjectsOverview>
-@using ContentModels = Umbraco.Web.PublishedModels;
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ProjectsViewModel>
+@using AarhusWebDevCoop.ViewModels;
 @{
     Layout = "Master.cshtml";
 }
 <!DOCTYPE HTML>
 <html>
+<body>
 
+    <!-- Jumbotron, w title -->
+    <div class="jumbotron text-center jumbotron-fluid">
+        <div class="container">
 
-<!-- Jumbotron, w title -->
-<div class="jumbotron text-center jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-1">@Model.ProjectsTitle</h1>
-        <p>What we do when we do what we do - and why!</p>
-    </div>
-</div>
-
-<!-- Main container -->
-<div class="container">
-
-    <!-- Featured blogpost -->
-    <div class="row section">
-        <div class="col-md-12">
-            @Model.ProjectsBodyText
+            <p>What we do when we do what we do - and why!</p>
         </div>
     </div>
 
-    <!-- Latest blog posts -->
-    <div class="row section">
-        <div class="col-md-12">
-            <h3>Projects</h3>
-
-
+    <div class="sidenav">
+        <ul>
             @{
-                var selection = Umbraco.Content(Guid.Parse("c2dc0d55-cc17-4cc8-a11c-ea9ed8cabaa6"))
-                .ChildrenOfType("projectItem")
-                .Where(x => x.IsVisible())
-                .OrderByDescending(x => x.CreateDate);
-            }
-            <ul>
-                @foreach (var item in selection)
+                foreach (var item in Model.ProjectStatusList)
                 {
-                    <article class="special">
-                        <div class="projectDate"> @item.CreateDate </div>
-                        <div>@item.Value("projectStatus") </div>
-                        <div class="ProjectTitle"><a href="@item.Url">@item.Name</a></div>
-                    </article>
-                    <br>
-                    <br>
+                    <li class="nav-item @(item.ToLower() == Model.ProjectStatus.ToLower() ? "current" : null)">
+                        <a href="@item.ToLower()">@item</a>
+                    </li>
                 }
-            </ul>
+            }
+        </ul>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+
+
+        <div class="row section">
+            <div class="col-md-12">
+                <h3>Projects</h3>
 
 
 
+                <section>
+                    @foreach (var item in Model.Projects)
+                    {
+                        <div class="project">
+                            <div class="projecttitle"><a href="@item.Url()">@item.Name</a></div>
+                            <div class="projectpreview">
+                                @Html.Raw(item.Value("projectDescription").ToString().Truncate(100))
+                                <a href="@item.Url()">Read More..</a>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </section>
 
+                <!-- Scripts -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-
-
+            </div>
         </div>
     </div>
 
-
-</div>
-
-
-
-<!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-	</body>
+</body>
 </html>
