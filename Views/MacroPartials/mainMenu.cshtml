@@ -10,7 +10,11 @@
 
 @{
     var root = Model.Content.Root();
-    var selection = root.Children.Where(x => x.IsVisible()).ToArray(); }
+    var selection = root.Children.Where(x => x.IsVisible()).ToArray();
+    List<string> groupList = new List<string>();
+    groupList.Add("guest");
+    groupList.Add("active");
+}
 
 @if (selection.Length > 0)
 {
@@ -24,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-             
+
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,47 +44,87 @@
                     {
                         if (item.Children.Any())
                         {
-                        
-                        
-                            if(item.Name == "Projects")
+
+
+                            if (item.Name == "Projects")
                             {
                                 <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@item.Name <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                   <li> <a href="@item.Url()">All @item.Name</a> </li>
-                                    @foreach (var sub in item.Children.Where(x => x.HasValue("projectStatus") && x.GetProperty("projectStatus").Value<string>() == "Completed"
-                                    && x.HasValue("umbracoNaviHide") && x.GetProperty("umbracoNaviHide").Value<bool>() == false)
-                                                .OrderByDescending(x => x.CreateDate).ToArray())
-                                    {
-                                        if (Umbraco.MemberHasAccess(sub.Path))
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@item.Name <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+
+
+                                        @foreach (var sub in item.Children.Where(x => x.HasValue("projectStatus") && x.GetProperty("projectStatus")
+                                        .Value<string>() == "Completed" && x.HasValue("umbracoNaviHide") && x.GetProperty("umbracoNaviHide").Value<bool>
+                                               () == false)
+                                               .OrderByDescending(x => x.CreateDate).ToArray())
                                         {
-                                        <li><a href="@sub.Url()">@sub.Name</a></li>
+                                            if (Umbraco.MemberHasAccess(sub.Path))
+                                            {
+                                                <li><a href="@sub.Url()">@sub.Name</a></li>
+                                            }
                                         }
-                                    }
-                                </ul>
-                            </li>
-                            
-                            }else if (item.Name != "Projects")
+
+                                        @if (Roles.IsUserInRole("guest"))
+                                        {
+                                            foreach (var sub in item.Children.Where(x => x.HasValue("projectStatus") && (x.GetProperty("projectStatus").Value
+                                            <string>
+                                                () == "Initiated" || x.GetProperty("projectStatus").Value<string>
+                                                    () == "Under development")
+                                                    && x.HasValue("umbracoNaviHide") && x.GetProperty("umbracoNaviHide").Value<bool>
+                                                        () == false)
+                                                        .OrderByDescending(x => x.CreateDate).ToArray())
+                                            {
+                                                if (Umbraco.MemberHasAccess(sub.Path))
+                                                {
+
+                                                    <li><a href="@sub.Url()">@sub.Name</a></li>
+                                                }
+                                            }
+                                        }
+                                        @if (Roles.IsUserInRole("active"))
+                                        {
+                                            foreach (var sub in item.Children.Where(x => x.HasValue("projectStatus") && (x.GetProperty("projectStatus").Value
+                                            <string>
+                                                () == "Initiated" || x.GetProperty("projectStatus").Value<string>
+                                                    () == "Under development" || x.GetProperty("projectStatus").Value<string>
+                                                    () == "Idea")
+                                                    && x.HasValue("umbracoNaviHide") && x.GetProperty("umbracoNaviHide").Value<bool>
+                                                        () == false)
+                                                        .OrderByDescending(x => x.CreateDate).ToArray())
+                                            {
+                                                if (Umbraco.MemberHasAccess(sub.Path))
+                                                {
+
+                                                    <li><a href="@sub.Url()">@sub.Name</a></li>
+                                                }
+                                            }
+                                        }
+
+                                    </ul>
+                                </li>
+
+                            }
+                            else 
                             {
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@item.Name <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                     <li> <a href="@item.Url()">All @item.Name</a> </li>
-                                    @foreach (var sub in item.Children.Where(x => x.IsVisible()).ToArray())
-                                    {
-                                        <li><a href="@sub.Url()">@sub.Name</a></li>
-                                    }
-                                   
-                                </ul>
-                            </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@item.Name <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li> <a href="@item.Url()">All @item.Name</a> </li>
+                                        @foreach (var sub in item.Children.Where(x => x.IsVisible()).ToArray())
+                                        {
+                                            <li><a href="@sub.Url()">@sub.Name</a></li>
+                                        }
+
+                                    </ul>
+                                </li>
                             }
                         }
-                        else if(!item.Children.Any())
+                        else if (!item.Children.Any())
                         {
 
-                        <li class="nav-item @(item.IsAncestorOrSelf(Model.Content) ? "active" : null)">
-                            <a href="@item.Url()">@item.Name</a>
-                        </li>
+                            <li class="nav-item @(item.IsAncestorOrSelf(Model.Content) ? "active" : null)">
+                                <a href="@item.Url()">@item.Name</a>
+                            </li>
                         }
                     }
 
@@ -89,4 +133,4 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-} 
+}
