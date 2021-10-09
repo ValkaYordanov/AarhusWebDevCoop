@@ -16,15 +16,21 @@
     .ChildrenOfType("event")
     .Where(x => x.IsVisible());
 }
-<ul>
-	@foreach (var item in selection)
-	{
-		<li>
-			<a href="@item.Url">@item.Name</a>
-		</li>
-	}
-</ul>
 
+<div class="container">
 
+	<div class="row section">
+		<div class="col-md-12">
+            <ul>
+            	@foreach (var item in selection)
+            	{
+            		<li>
+            			<a href="@item.Url">@item.Name</a>
+            		</li>
+            	}
+            </ul>
 
+        </div>
+    </div>
+</div>
 

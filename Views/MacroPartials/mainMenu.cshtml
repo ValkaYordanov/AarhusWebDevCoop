@@ -98,7 +98,6 @@
                                        role="button" aria-haspopup="true" aria-expanded="false">@item.Name 
                                     <span class="caret"> </span></a>
                                     <ul class="dropdown-menu">
-                                        <li> <a href="@item.Url()">All @item.Name</a> </li>
                                         @foreach (var sub in item.Children.Where(x => x.IsVisible()).ToArray())
                                         {
                                             <li><a href="@sub.Url()">@sub.Name</a></li>

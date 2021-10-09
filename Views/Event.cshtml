@@ -3,20 +3,27 @@
 @{
 	Layout = "Master.cshtml";
 }
+<div class="container">
 
-<h1>@Model.EventTitle</h1>
-<p>@Model.EventDescription</p>
-<p>Start date: @Model.EventStartDate</p>
-<p>End date: @Model.EventEndDate</p>
-<p>Location: @Model.Location.Value("address")</p>
+	<div class="row section">
+		<div class="col-md-12">
+            <h1>@Model.EventTitle</h1>
+            <p>@Model.EventDescription</p>
+            <p>Start date: @Model.EventStartDate</p>
+            <p>End date: @Model.EventEndDate</p>
+            <p>Location: @Model.Location.Value("address")</p>
 
-@foreach(Speaker speaker in Model.Speakers)
-{
 
-<div><img src="@speaker.Photo.Url()" width="200"/><br/></div>
-
-<p>
-    @speaker.FirstName @speaker.LastName<br/>
-    @speaker.Presentation
-</p>
-}
+            @foreach(Speaker speaker in Model.Speakers)
+            {
+            
+            <div><img src="@speaker.Photo.Url()" width="200"/><br/></div>
+            
+            <p>
+                @speaker.FirstName @speaker.LastName<br/>
+                @speaker.Presentation
+            </p>
+            }
+        </div>
+    </div>
+</div>
